@@ -45,7 +45,8 @@ io.on('connection', (socket) => {
     socket.join(data.room, function () {
       console.log(socket.rooms)
       let roomIdx = rooms.findIndex((i) => i.roomName == data.room)
-      if (rooms[roomIdx].users != data.username) {
+      let userIdx = rooms[roomIdx].users.findIndex((i) => i == data.username)
+      if (rooms[roomIdx].users[userIdx] != data.username) {
         rooms[roomIdx].users.push(data.username)
         console.log(rooms)
         io.sockets.in(data.room).emit('roomDetail', rooms[roomIdx])
