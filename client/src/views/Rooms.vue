@@ -11,9 +11,9 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <div class="container" v-if="rooms.length != 0">
-        <div class="card" v-for="(room, idx) in rooms" :key="idx">
-          <p>{{room.name}}</p>
-          <button class="btn btn-info" @click.prevent="joinRoom('room.name')">
+        <div class="card width-100" v-for="(room, idx) in rooms" :key="idx">
+          <p>{{ room.roomName }}</p>
+          <button class="btn btn-info" @click.prevent="joinRoom(room.roomName)">
           JoinRoom
           </button>
         </div>
@@ -42,23 +42,39 @@ export default {
   },
   methods: {
     createRoom () {
+      // nanti didelete aja dibawah ini
+      localStorage.setItem('username', 'testing')
+      // diatas ini didelete aja
       console.log(this.rooms)
       const payload = {
         // conditional, sesuaikan variable apa yang ada di localstorage
         name: this.roomName,
         creator: localStorage.getItem('username') || 'testing'
       }
-      this.$socket.emit('createRoom', payload)
-      console.log(payload)
-      this.roomName = ''
+      if (payload.name && payload.creator) {
+        this.$socket.emit('createRoom', payload)
+        console.log(payload)
+        this.roomName = ''
+      } else {
+        this.$socket.emit('createRoom')
+      }
     },
     checkConnect () {
       console.log('masuk check')
+    },
+    joinRoom (roomName) {
+      const payload = {
+        room: roomName,
+        username: localStorage.getItem('username') || 'testing'
+      }
+      this.$socket.emit('joinRoom', payload)
+      this.$router.push(`/lobby/${roomName}`)
     }
   },
   created () {
     this.checkConnect()
-    this.$socket.on('getRooms', data => {
+    this.createRoom()
+    this.$socket.on('updateRooms', data => {
       this.rooms = data
     })
   }
