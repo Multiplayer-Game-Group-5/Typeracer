@@ -68,6 +68,7 @@ export default {
         imageAlt: 'Custom image'
       })
       this.$router.push('/')
+      localStorage.clear()
     }
   },
   methods: {
