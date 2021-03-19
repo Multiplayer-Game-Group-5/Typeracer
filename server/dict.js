@@ -20,7 +20,7 @@ const words = [
     'mencengangkan',
     'melambaikan tangan kanan aparatur pemerintah',
     'buaya, biawak, buaian',
-    'sempat-sempatnya semut-semut itu saling senyum-senyum dan salam-salaman sama semut-semut yang mau senyum-senyum dan salam-salaman sama semut-semut itu',
+    'sempat-sempatnya semut-semut itu saling senyum-senyum dan salam-salaman',
     'keledai makan kedelai di kedai',
     'engkau ulung guling ulang ulas suling',
     'kuaci, kacang, kecoa, kuaci, kacang, kecoa',
@@ -38,17 +38,7 @@ const words = [
     'Miro Baldo Bento',
     'Christian Lenglolo',
     'Keith Kayamba Gumbs',
-    'Roger Batoum',
-    'ประเทศไทยรวมเลือดเนื้อชาติเชื้อไทย เป็นประชารัฐ ไผทของไทยทุกส่วน',
-    'জনগণমন-অধিনায়ক জয় হে ভারতভাগ্যবিধাতা!',
-    'きみがよは ちよにやちよに',
-    '아침은 빛나라 이 강산 은금에 자원도 가득한 삼천리 아름다운 내 조국 반만년 오랜 력사에',
-    'የዜግነት ፡ ክብር ፡ በኢትዮጵያችን ፡ ጸንቶ ፣ ታየ ፡ ሕዝባዊነት ፡ ዳር ፡ እስከዳር ፡ በርቶ ። ለሰላም ፡ ለፍትሕ ፡ ለሕዝቦች ፡ ነጻነት ፣ በእኩልነት ፡ በፍቅር ፡ ቆመናል ፡ ባንድነት ።',
-    'შენი ოცნება ასრულდა, რისთვისაც სისხლი ღვარეო, მშრომელი კაცის მარჯვენით აყვავებულო მხარეო.',
-    'Փառք քեզ՝ միշտ փառք՝ Սովետական Հայաստան՝ Աշխատասեր՝ ճարտարագործ-շինարար՝ Ժողովրդոց սուրբ դաշինքով անսասան՝ Դու ծաղկում ես և կերտում լույս ապագադ:',
-    '前进! 各民族英雄的人民! 伟大的共产党, 领导我们继续长征! 万众一心奔向共产主义明天! 建设祖国, 保卫祖国, 英勇地斗争.',
-    'Σε γνωρίζω από την κόψη Του σπαθιού την τρομερή, Σε γνωρίζω από την όψη, Που με βιά μετράει τη γη',
-    'Ачит нам алсыг гийгүүлж хүчит түмэн улсыг хөгжүүлж. Бууршгүй зүтгэл дүүрэн хөвчилсөн цуцашгүй тэмцэл түүхийг товчилсон'
+    'Roger Batoum'
 ]
 
 module.exports = words
