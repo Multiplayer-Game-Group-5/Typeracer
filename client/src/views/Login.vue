@@ -20,50 +20,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Swal from 'sweetalert2'
-
 export default {
   name: 'Login',
   data () {
     return {
       username: ''
-      // Nanti di v-model diinput login
-    }
-  },
-  sockets: {
-    sendAllUser (data) {
-      this.$store.commit('FETCH_USERS', data)
     }
   },
   methods: {
-    // Nanti ini di @click di submit login
     login () {
-      if (this.users.length <= 3) {
-        localStorage.setItem('username', this.username)
-        const payloadUser = {
-          username: this.username,
-          points: 0
-        }
-        this.$socket.emit('login', payloadUser)
-        this.$router.push('/play')
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Room already full'
-        })
-      }
+      localStorage.setItem('username', this.username)
+      this.$router.push('/rooms')
+      this.$socket.emit('login', this.username)
+      this.username = ''
     }
-  },
-  computed: {
-    ...mapState(['users'])
-  },
-  created () {
-    this.$socket.emit('fetchUser')
   }
 }
 </script>
 
 <style>
-
 </style>

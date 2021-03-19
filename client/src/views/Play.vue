@@ -109,11 +109,11 @@ export default {
     submitWord () {
       if (this.inputWord === this.word) {
         // Tambah 10 point user
-        this.$socket.emit('addPoint', localStorage.username)
-        this.$socket.emit('fetchUser')
+        this.$socket.emit('addPoint', { username: localStorage.username, roomName: this.$route.params })
+        this.$socket.emit('fetchUser', this.$route.params)
         this.inputWord = ''
         // Minta random word pake socket.io buat change this.wordnya
-        this.$socket.emit('changeWord')
+        this.$socket.emit('changeWord', this.$route.params)
       } else {
         // Swal wrong word
         let timerInterval
@@ -145,15 +145,15 @@ export default {
       }
     },
     changeStartGame () {
-      this.$socket.emit('startGame')
+      this.$socket.emit('startGame', this.$route.params)
     }
   },
   computed: {
     ...mapState(['word', 'users'])
   },
   created () {
-    this.$socket.emit('changeWord')
-    this.$socket.emit('fetchUser')
+    this.$socket.emit('changeWord', this.$route.params)
+    this.$socket.emit('fetchUser', this.$route.params)
   },
   components: {
     UserCard
