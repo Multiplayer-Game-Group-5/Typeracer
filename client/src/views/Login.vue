@@ -3,7 +3,7 @@
     <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 100vh">
       <div class="d-flex align-items-center justify-content-center w-25 mx-auto">
         <div class="row" style="margin-top: 200px;">
-          <h1>Welcome to Typeracer, login first please ...</h1>
+          <h1 class="mb-5">Welcome to Typeracer</h1>
           <form @submit.prevent="login">
             <div class="mb-3">
               <label for="name" class="form-label">Username</label>
@@ -21,6 +21,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
   name: 'Login',
   data () {
@@ -46,12 +48,11 @@ export default {
         this.$socket.emit('login', payloadUser)
         this.$router.push('/play')
       } else {
-        // Swal room full
-        console.log('Room full')
+        Swal.fire({
+          icon: 'error',
+          title: 'Room already full'
+        })
       }
-    },
-    test () {
-      console.log(this.users)
     }
   },
   computed: {

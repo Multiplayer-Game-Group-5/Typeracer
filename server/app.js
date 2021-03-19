@@ -46,6 +46,11 @@ io.on('connection', (socket) => {
       }
     })
   })
+
+  socket.on('startGame', () => {
+    io.emit('startGameAllUsers');
+  })
+
 });
 
 http.listen(port, () => {

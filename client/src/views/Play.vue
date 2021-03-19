@@ -1,13 +1,16 @@
 <template>
   <section>
-    <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 120vh">
+    <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 150vh">
       <div class="d-flex align-items-center justify-content-center w-25 mx-auto">
         <div class="row" style="margin-top: 200px;">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Random Word</h5>
-              <h1 v-if="users.length >= 2" class="card-text">{{ word }}</h1>
-              <h1 v-else class="card-text">Waiting for players</h1>
+              <h1 v-if="startGame === true" class="card-text">{{ word }}</h1>
+              <h1 v-if="users.length < 2 && startGame === false" class="card-text">Waiting for players</h1>
+              <div v-if="startGame === false && users.length >= 2" class="d-flex justify-content-center">
+                <a type="submit" class="btn btn-warning px-4 m-2" @click.prevent="changeStartGame">Start</a>
+              </div>
             </div>
           </div>
         </div>
@@ -41,12 +44,43 @@ export default {
   name: 'Play',
   data () {
     return {
-      inputWord: ''
+      inputWord: '',
+      startGame: false
     }
   },
   sockets: {
     nextWord (data) {
       this.$store.commit('CHANGE_WORD', data)
+      this.inputWord = ''
+      let timerInterval
+      Swal.fire({
+        title: 'Next word!',
+        html: 'Wait for <b></b> milliseconds.',
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          timerInterval = setInterval(() => {
+            const content = Swal.getContent()
+            if (content) {
+              const b = content.querySelector('b')
+              if (b) {
+                b.textContent = Swal.getTimerLeft()
+              }
+            }
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+    },
+    startGameAllUsers () {
+      this.startGame = true
     },
     getUsers (data) {
       this.$store.commit('FETCH_USERS', data)
@@ -58,7 +92,6 @@ export default {
       this.$store.commit('FETCH_USERS', data)
     },
     getWinner (data) {
-      // Swal menang, suruh login
       Swal.fire({
         title: `Congratulation ${data.username}!`,
         text: 'Winner winner chicken dinner!',
@@ -67,6 +100,7 @@ export default {
         imageHeight: 200,
         imageAlt: 'Custom image'
       })
+      this.startGame = false
       this.$router.push('/')
       localStorage.clear()
     }
@@ -104,13 +138,14 @@ export default {
             clearInterval(timerInterval)
           }
         }).then((result) => {
-          /* Read more about handling dismissals below */
           if (result.dismiss === Swal.DismissReason.timer) {
             console.log('I was closed by the timer')
           }
         })
-        console.log('Kata salah')
       }
+    },
+    changeStartGame () {
+      this.$socket.emit('startGame')
     }
   },
   computed: {
