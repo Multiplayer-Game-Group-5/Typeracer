@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 150vh">
+    <div class="container-fluid" style="height: 150vh">
       <div class="d-flex align-items-center justify-content-center w-25 mx-auto">
         <div class="row" style="margin-top: 200px;">
           <div class="card" style="width: 18rem;">

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 100vh">
+    <div class="container-fluid" style="height: 100vh">
       <div class="d-flex align-items-center justify-content-center w-25 mx-auto">
         <div class="row" style="margin-top: 200px;">
           <h1 class="mb-5">Welcome to Typeracer</h1>
