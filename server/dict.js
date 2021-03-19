@@ -38,7 +38,8 @@ const words = [
     'Miro Baldo Bento',
     'Christian Lenglolo',
     'Keith Kayamba Gumbs',
-    'Roger Batoum'
+    'Roger Batoum',
+    "breadthwise","rationalness","inculpatory","uneffaced","puddling","traveled","enamour","sneer","dissimulates","bursitis","warehousemen","vineyardists","gigging","hatchlings","multisport","supergroup","phosphid","sclaffed","haggadistic","gromwells","repeople","grader","mountaineer","premoistens","ped","perking","familiarising","systematizer","suzerain","aslope","splints","antecedents","haymows","mojarra","overlive","extralinguistic","episcias","unearthed","bioremediations","managerially","titanous","hooter","phlegmy","outmanipulate","cityscape","mystifyingly","detinue","ridgeling","incandescing","fiftieth","aquiferous","trichinoses","superscribed","catechismal","statices","coassuming","nerdiest","incongruences","pahlavis","gust","halophyte","indeclinable","overtip","recodified","powerless","overenrolled","godded","ostraka","marled","luxuriance","theoretically","acrimoniously","spacemen","parliamentarian","profaneness","bawcock","arythmias","entellus","golconda","stressing","laypeople","corroded","quantizer","transudate","sprocket","underdog","upchucked","voidances","soiling","vistaless","parge","oxazepams","unflamboyant","kava","superactivity","yeggman","ethnography","sauces","warty","somewise"
 ]
 
 module.exports = words

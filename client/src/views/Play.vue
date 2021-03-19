@@ -1,15 +1,18 @@
 <template>
   <section>
-    <div class="container-fluid" style="background-color: rgb(96, 158, 145); height: 150vh">
+    <div class="container-fluid" style="height: 150vh">
       <div class="d-flex align-items-center justify-content-center w-25 mx-auto">
         <div class="row" style="margin-top: 200px;">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 40rem;">
             <div class="card-body">
               <h5 class="card-title">Random Word</h5>
               <h1 v-if="startGame === true" class="card-text disable-select">{{ word }}</h1>
               <h1 v-if="users.length < 2 && startGame === false" class="card-text">Waiting for players</h1>
-              <div v-if="startGame === false && users.length >= 2" class="d-flex justify-content-center">
+              <div v-if="startGame === false && users.length >= 2">
                 <a type="submit" class="btn btn-warning px-4 m-2" @click.prevent="changeStartGame">Start</a>
+                <div>
+                  <h6>Player with 100 points, win the game!</h6>
+                </div>
               </div>
             </div>
           </div>
@@ -120,6 +123,10 @@ export default {
         let timerInterval
         Swal.fire({
           title: 'Wrong!',
+          imageUrl: 'https://media1.tenor.com/images/e4d613ee59e79b93e38ec2521cce19e4/tenor.gif?itemid=5751430',
+          imageWidth: 300,
+          imageHeight: 300,
+          imageAlt: 'Custom image',
           html: 'Punished for <b></b> milliseconds.',
           timer: 1500,
           timerProgressBar: true,
