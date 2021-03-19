@@ -1,7 +1,18 @@
 <template>
   <div class="col-3">
-    <p>{{ user.username }}</p>
-    <p>{{ user.points }}</p>
+    <div class="card">
+      <div class="card-header">
+        {{ user.username }}
+      </div>
+      <div>
+        <div class="mt-1">
+          Score:
+        </div>
+        <div class="mb-1">
+          {{ user.points }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
