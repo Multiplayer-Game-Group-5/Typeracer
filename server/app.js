@@ -25,7 +25,7 @@ function randomWords (arr) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome to typeracer server!')
 })
 
 io.on('connection', (socket) => {
