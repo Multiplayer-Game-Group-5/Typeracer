@@ -38,12 +38,14 @@ export default {
     updateRooms (data) {
       console.log(data)
       this.rooms = data
+    },
+    getRooms (data) {
+      this.rooms = data
+      console.log(this.rooms, 'INI GET ROOMS')
     }
   },
   methods: {
     createRoom () {
-      // nanti didelete aja dibawah ini
-      localStorage.setItem('username', 'testing')
       // diatas ini didelete aja
       console.log(this.rooms)
       const payload = {
@@ -77,6 +79,7 @@ export default {
     this.$socket.on('updateRooms', data => {
       this.rooms = data
     })
+    this.$socket.emit('login', this.username)
   }
 }
 </script>
