@@ -1,5 +1,4 @@
 const express = require('express');
-const { emit } = require('process');
 const app = express()
 const port = process.env.PORT || 3000
 const http = require('http').createServer(app)
@@ -7,13 +6,22 @@ const io = require('socket.io')(http)
 
 let rooms = []
 let users = []
+let words = require('./dict')
 
-let words = [
-  'makan', 'coding', 'belajar', 'masak', 'kuku kaki', 'kakek', 'astaga', 'tidur', 'seratus ribu'
-]
+let obj = {}
+for (let i = 0; i < words.length; i++) {
+  obj[i] = 0
+}
 
 function randomWords (arr) {
-  return arr[Math.floor((Math.random()) * words.length)]
+  let number = Math.floor((Math.random()) * words.length)
+  if (obj[number] === 0) {
+    obj[number] += 1
+    return arr[number]
+  } else {
+    obj[number] += 1
+    return randomWords (arr)
+  }
 }
 
 app.get('/', (req, res) => {
@@ -33,14 +41,14 @@ io.on('connection', (socket) => {
   socket.on('createRoom', (data) => {
     if(data) {
       console.log("masuk create room appjs")
-      console.log(data, 'DI CREATE ROOM')
+
       let room = {
         roomName: data.name,
         creator: data.creator,
         users: []
       }
       rooms.push(room)
-      console.log(rooms, 'DI CREATE ROOM 2')
+
       io.emit('updateRooms', rooms)
     } else {
       io.emit('updateRooms', rooms)
@@ -49,8 +57,7 @@ io.on('connection', (socket) => {
 
   // join ke suatu room
   socket.on('joinRoom', (data) => {
-    console.log("masuk joinroom")
-    console.log(data, 'SEBELUM JOIN ROOM')
+
     socket.join(data.room, function () {
       console.log(socket.rooms)
       let roomIdx = rooms.findIndex((i) => i.roomName == data.room)
@@ -76,7 +83,7 @@ io.on('connection', (socket) => {
   // START GAME
   socket.on('fetchUser', (data) => {
     let roomIdx = rooms.findIndex((i) => i.roomName == data.roomName)
-    console.log(data, 'PARAMS');
+    
     if (rooms[roomIdx]) {
       io.sockets.in(data.roomName).emit('sendAllUser', rooms[roomIdx].users);
     }

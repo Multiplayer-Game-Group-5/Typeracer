@@ -6,7 +6,7 @@
           <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Random Word</h5>
-              <h1 v-if="startGame === true" class="card-text">{{ word }}</h1>
+              <h1 v-if="startGame === true" class="card-text disable-select">{{ word }}</h1>
               <h1 v-if="users.length < 2 && startGame === false" class="card-text">Waiting for players</h1>
               <div v-if="startGame === false && users.length >= 2" class="d-flex justify-content-center">
                 <a type="submit" class="btn btn-warning px-4 m-2" @click.prevent="changeStartGame">Start</a>
@@ -163,5 +163,11 @@ export default {
 </script>
 
 <style>
-
+  .disable-select {
+    user-select: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+}
 </style>
