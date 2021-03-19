@@ -3,7 +3,15 @@ const { emit } = require('process');
 const app = express()
 const port = process.env.PORT || 3000
 const http = require('http').createServer(app)
-const io = require('socket.io')(http);
+const io = require('socket.io')(http)
+let users = []
+let words = [
+  'makan', 'coding', 'belajar', 'masak', 'kuku kaki', 'kakek', 'astaga', 'tidur', 'seratus ribu'
+]
+
+function randomWords (arr) {
+  return arr[Math.floor((Math.random()) * words.length)]
+}
 
 // { roomName: 'dfadsfsa', creator: 'testing', users: [] }
 let rooms = []
@@ -107,8 +115,9 @@ io.on('connection', (socket) => {
     })
   })
 
+ 
   socket.on('startGame', (data) => {
-    io.sockets.in(data.roomName).emit('startGameAllUsers');
+    io.sockets.in(data.roomName).emit('startGameAllUsers');\
   })
 
 });

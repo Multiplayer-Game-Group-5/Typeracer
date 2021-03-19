@@ -39,6 +39,7 @@
 import { mapState } from 'vuex'
 import UserCard from '../components/UserCard'
 import Swal from 'sweetalert2'
+
 export default {
   name: 'Play',
   data () {
@@ -161,4 +162,5 @@ export default {
 </script>
 
 <style>
+
 </style>
