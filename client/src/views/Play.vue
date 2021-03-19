@@ -102,6 +102,7 @@ export default {
       })
       this.startGame = false
       this.$router.push('/')
+      this.$socket.emit('login')
       localStorage.clear()
     }
   },
