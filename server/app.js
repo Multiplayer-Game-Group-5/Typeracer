@@ -4,16 +4,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
-let users = []
-let words = [
-  'makan', 'coding', 'belajar', 'masak', 'kuku kaki', 'kakek', 'astaga', 'tidur', 'seratus ribu'
-]
 
-function randomWords (arr) {
-  return arr[Math.floor((Math.random()) * words.length)]
-}
-
-// { roomName: 'dfadsfsa', creator: 'testing', users: [] }
 let rooms = []
 let users = []
 
@@ -33,7 +24,7 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 
   // disesuaikan dengan emit kode (disini login) (data berisi username) dari vue client untuk mengirim username yang diinput di awal page
-  socket.on('login', (data) => {
+  socket.on('login', () => {
     socket.emit('getRooms', rooms)
     // mengirimkan data rooms yang tersedia
   })
@@ -70,9 +61,6 @@ io.on('connection', (socket) => {
           points: 0
         })
 
-        // console.log(rooms, 'SEE');
-        // users = rooms[roomIdx].users
-        // console.log(users)
         io.sockets.in(data.room).emit('roomDetail', rooms[roomIdx])
       } else {
         io.sockets.in(data.room).emit('roomDetail', rooms[roomIdx])
@@ -117,7 +105,7 @@ io.on('connection', (socket) => {
 
  
   socket.on('startGame', (data) => {
-    io.sockets.in(data.roomName).emit('startGameAllUsers');\
+    io.sockets.in(data.roomName).emit('startGameAllUsers');
   })
 
 });

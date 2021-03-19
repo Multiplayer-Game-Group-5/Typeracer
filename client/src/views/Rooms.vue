@@ -61,9 +61,6 @@ export default {
         this.$socket.emit('createRoom')
       }
     },
-    checkConnect () {
-      console.log('masuk check')
-    },
     joinRoom (roomName) {
       const payload = {
         room: roomName,
@@ -74,7 +71,6 @@ export default {
     }
   },
   created () {
-    this.checkConnect()
     this.createRoom()
     this.$socket.on('updateRooms', data => {
       this.rooms = data
