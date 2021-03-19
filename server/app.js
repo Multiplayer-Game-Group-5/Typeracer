@@ -4,12 +4,22 @@ const port = process.env.PORT || 3000
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 let users = []
-let words = [
-  'makan', 'coding', 'belajar', 'masak', 'kuku kaki', 'kakek', 'astaga', 'tidur', 'seratus ribu'
-]
+let words = require('./dict')
+
+let obj = {}
+for (let i = 0; i < words.length; i++) {
+  obj[i] = 0
+}
 
 function randomWords (arr) {
-  return arr[Math.floor((Math.random()) * words.length)]
+  let number = Math.floor((Math.random()) * words.length)
+  if (obj[number] === 0) {
+    obj[number] += 1
+    return arr[number]
+  } else {
+    obj[number] += 1
+    return randomWords (arr)
+  }
 }
 
 app.get('/', (req, res) => {
@@ -25,7 +35,6 @@ io.on('connection', (socket) => {
 
   socket.on('login', (data) => {
     users.push(data);
-    console.log(users);
     io.emit('getUsers', users)
   })
 
